@@ -1,0 +1,5 @@
+C:\Users\Milica\Desktop\asp-project\Application\bin\Debug\net5.0\Domain.dll
+C:\Users\Milica\Desktop\asp-project\Application\obj\Debug\net5.0\Application.csprojAssemblyReference.cache
+C:\Users\Milica\Desktop\asp-project\Application\obj\Debug\net5.0\Application.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Milica\Desktop\asp-project\Application\obj\Debug\net5.0\Application.AssemblyInfoInputs.cache
+C:\Users\Milica\Desktop\asp-project\Application\obj\Debug\net5.0\Application.AssemblyInfo.cs
