@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using Application.Exceptions;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,7 +19,14 @@ namespace Application
 
         public void ExecuteCommand<TRequest>(ICommand<TRequest> command, TRequest request)
         {
+            Console.WriteLine($"{DateTime.Now}: {actor.Identity} is trying to execute {command.Name} using data: " + $"{JsonConvert.SerializeObject(request)}");
 
+            if (!actor.AllowedUseCases.Contains(command.Id))
+            {
+                throw new UnauthorizedUseCaseException(command, actor);
+            }
+
+            command.Execute(request);
         }
     }
 }
