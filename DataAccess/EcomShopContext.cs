@@ -15,6 +15,10 @@ namespace EfDataAccess
             modelBuilder.ApplyConfiguration(new CategoryConfiguration());
             modelBuilder.ApplyConfiguration(new DiscountConfiguration());
             modelBuilder.ApplyConfiguration(new ProductConfiguration());
+            modelBuilder.ApplyConfiguration(new OrderConfiguration());
+            modelBuilder.ApplyConfiguration(new OrderItemConfiguration());
+            modelBuilder.ApplyConfiguration(new CartConfiguration());
+            modelBuilder.ApplyConfiguration(new CartItemConfiguration());
 
             modelBuilder.Entity<User>().HasQueryFilter(p => !p.IsDeleted);
             modelBuilder.Entity<UserAddress>().HasQueryFilter(p => !p.IsDeleted);
@@ -22,6 +26,8 @@ namespace EfDataAccess
             modelBuilder.Entity<Category>().HasQueryFilter(p => !p.IsDeleted);
             modelBuilder.Entity<Discount>().HasQueryFilter(p => !p.IsDeleted);
             modelBuilder.Entity<Product>().HasQueryFilter(p => !p.IsDeleted);
+            modelBuilder.Entity<Order>().HasQueryFilter(p => !p.IsDeleted);
+            modelBuilder.Entity<OrderItem>().HasQueryFilter(p => !p.IsDeleted);
         }
         public override int SaveChanges()
         {
@@ -58,5 +64,9 @@ namespace EfDataAccess
         public DbSet<Category> Categories { get; set; }
         public DbSet<Discount> Discounts { get; set; }
         public DbSet<Product> Products { get; set; }
+        public DbSet<Order> Orders { get; set; }
+        public DbSet<OrderItem> OrderItems { get; set; }
+        public DbSet<Cart> Cart { get; set; }
+        public DbSet<CartItem> CartItems { get; set; }
     }
 }

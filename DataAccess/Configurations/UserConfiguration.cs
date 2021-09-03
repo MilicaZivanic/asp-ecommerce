@@ -21,6 +21,8 @@ namespace EfDataAccess.Configurations
 
             builder.HasMany(a => a.UserAddresses).WithOne(u => u.User).HasForeignKey(a => a.UserId).OnDelete(DeleteBehavior.Restrict);
             builder.HasMany(p => p.UserPayments).WithOne(u => u.User).HasForeignKey(p => p.UserId).OnDelete(DeleteBehavior.Restrict);
+            builder.HasMany(o => o.Orders).WithOne(u => u.User).HasForeignKey(o => o.UserId).OnDelete(DeleteBehavior.Restrict);
+            builder.HasMany(c => c.Carts).WithOne(u => u.User).HasForeignKey(c => c.UserId).OnDelete(DeleteBehavior.Restrict);
         }
     }
 }

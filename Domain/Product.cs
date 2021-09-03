@@ -17,5 +17,8 @@ namespace Domain
 
         public virtual Category Category { get; set; }
         public virtual Discount Discount { get; set; }
+        public ICollection<CartItem> CartItems { get; set; } = new HashSet<CartItem>();
+        public ICollection<OrderItem> OrderItems { get; set; } = new HashSet<OrderItem>();
+
     }
 }

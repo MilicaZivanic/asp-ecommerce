@@ -18,6 +18,8 @@ namespace EfDataAccess.Configurations
             builder.Property(x => x.Price).IsRequired();
             builder.Property(x => x.Quantity).IsRequired();
 
+            builder.HasMany(oi => oi.OrderItems).WithOne(p => p.Product).HasForeignKey(oi => oi.ProductId).OnDelete(DeleteBehavior.SetNull);
+            builder.HasMany(ci => ci.CartItems).WithOne(p => p.Product).HasForeignKey(ci => ci.ProductId).OnDelete(DeleteBehavior.Restrict);
         }
     }
 }
