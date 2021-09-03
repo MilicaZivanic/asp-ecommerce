@@ -34,6 +34,7 @@
       "API/1.0.0": {
         "dependencies": {
           "Application": "1.0.0",
+          "Bogus": "33.1.1",
           "Domain": "1.0.0",
           "EfDataAccess": "1.0.0",
           "Implementation": "1.0.0",
@@ -325,6 +326,28 @@
         },
         "compile": {
           "API.dll": {}
+        }
+      },
+      "Bogus/33.1.1": {
+        "runtime": {
+          "lib/netstandard2.0/Bogus.dll": {
+            "assemblyVersion": "33.1.1.0",
+            "fileVersion": "33.1.1.0"
+          }
+        },
+        "compile": {
+          "lib/netstandard2.0/Bogus.dll": {}
+        }
+      },
+      "FluentValidation/10.3.3": {
+        "runtime": {
+          "lib/net5.0/FluentValidation.dll": {
+            "assemblyVersion": "9.0.0.0",
+            "fileVersion": "10.3.3.0"
+          }
+        },
+        "compile": {
+          "lib/net5.0/FluentValidation.dll": {}
         }
       },
       "Microsoft.CSharp/4.5.0": {},
@@ -1308,7 +1331,8 @@
       "Implementation/1.0.0": {
         "dependencies": {
           "Application": "1.0.0",
-          "EfDataAccess": "1.0.0"
+          "EfDataAccess": "1.0.0",
+          "FluentValidation": "10.3.3"
         },
         "runtime": {
           "Implementation.dll": {}
@@ -3010,6 +3034,20 @@
       "type": "project",
       "serviceable": false,
       "sha512": ""
+    },
+    "Bogus/33.1.1": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-k3zLOajCV2iaus75RFqtC3PhHfJHuP2/jTN5Yl1Gixr0jTzrKiufm6oovpn6Nhbjw/zr5CTIzYioUS6HRhEi1w==",
+      "path": "bogus/33.1.1",
+      "hashPath": "bogus.33.1.1.nupkg.sha512"
+    },
+    "FluentValidation/10.3.3": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-sgRC+7q4mnmDHE9ehk2cvb+FDTy/gtw5iBoKFY3FVp1ZwFsLS0kIcdSpNlCO3XyyNIzZI2ca8I/YiFG9pM6x0Q==",
+      "path": "fluentvalidation/10.3.3",
+      "hashPath": "fluentvalidation.10.3.3.nupkg.sha512"
     },
     "Microsoft.CSharp/4.5.0": {
       "type": "package",

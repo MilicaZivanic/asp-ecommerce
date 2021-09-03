@@ -1,9 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "4+rc2An6w1hwNXEf+0UdLJrV8UgI+jfBVja6P0SFxAdhc1ZFVEAwXmPqSL0jmDysxNFE6oQI1Xun7Cmfjg9Ufw==",
+  "dgSpecHash": "n6iA3oEA6wWSNo9T4FAGrHpSmZFt72Lc+xyXX7U+IwSBj5M1heIp3aiT8PAhO9a0CdpTFPLochRUPFCJ5+xQ3A==",
   "success": true,
   "projectFilePath": "C:\\Users\\Milica\\Desktop\\asp-project\\Implementation\\Implementation.csproj",
   "expectedPackageFiles": [
+    "C:\\Users\\Milica\\.nuget\\packages\\fluentvalidation\\10.3.3\\fluentvalidation.10.3.3.nupkg.sha512",
     "C:\\Users\\Milica\\.nuget\\packages\\microsoft.csharp\\4.5.0\\microsoft.csharp.4.5.0.nupkg.sha512",
     "C:\\Users\\Milica\\.nuget\\packages\\microsoft.data.sqlclient\\2.0.1\\microsoft.data.sqlclient.2.0.1.nupkg.sha512",
     "C:\\Users\\Milica\\.nuget\\packages\\microsoft.data.sqlclient.sni.runtime\\2.0.1\\microsoft.data.sqlclient.sni.runtime.2.0.1.nupkg.sha512",

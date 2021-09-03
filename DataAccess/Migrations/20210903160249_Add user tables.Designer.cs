@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EfDataAccess.Migrations
 {
     [DbContext(typeof(EcomShopContext))]
-    [Migration("20210903134237_add user tables")]
-    partial class addusertables
+    [Migration("20210903160249_Add user tables")]
+    partial class Addusertables
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -105,8 +105,9 @@ namespace EfDataAccess.Migrations
                     b.Property<DateTime?>("ModifiedAt")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("PostalCode")
-                        .HasColumnType("int");
+                    b.Property<string>("PostalCode")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Telephone")
                         .IsRequired()

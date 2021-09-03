@@ -3,21 +3,18 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace EfDataAccess.Migrations
 {
-    public partial class addusertables : Migration
+    public partial class Addproducttables : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "Users",
+                name: "Categories",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    FirstName = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    LastName = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Email = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    Password = table.Column<string>(type: "nvarchar(10)", maxLength: 10, nullable: false),
-                    Phone = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
                     ModifiedAt = table.Column<DateTime>(type: "datetime2", nullable: true),
                     IsDeleted = table.Column<bool>(type: "bit", nullable: false),
@@ -26,21 +23,18 @@ namespace EfDataAccess.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Users", x => x.Id);
+                    table.PrimaryKey("PK_Categories", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
-                name: "UserAddresses",
+                name: "Discounts",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    UserId = table.Column<int>(type: "int", nullable: false),
-                    Address = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    City = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    PostalCode = table.Column<int>(type: "int", nullable: false),
-                    Country = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Telephone = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    DiscountPercent = table.Column<int>(type: "int", nullable: false),
                     CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
                     ModifiedAt = table.Column<DateTime>(type: "datetime2", nullable: true),
                     IsDeleted = table.Column<bool>(type: "bit", nullable: false),
@@ -49,26 +43,21 @@ namespace EfDataAccess.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_UserAddresses", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_UserAddresses_Users_UserId",
-                        column: x => x.UserId,
-                        principalTable: "Users",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                    table.PrimaryKey("PK_Discounts", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
-                name: "UserPayments",
+                name: "Products",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    UserId = table.Column<int>(type: "int", nullable: false),
-                    PaymentType = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Provider = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    AccountNumber = table.Column<int>(type: "int", nullable: false),
-                    Expiry = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Price = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    Quantity = table.Column<int>(type: "int", nullable: false),
+                    CategoryId = table.Column<int>(type: "int", nullable: false),
+                    DiscountId = table.Column<int>(type: "int", nullable: true),
                     CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
                     ModifiedAt = table.Column<DateTime>(type: "datetime2", nullable: true),
                     IsDeleted = table.Column<bool>(type: "bit", nullable: false),
@@ -77,42 +66,42 @@ namespace EfDataAccess.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_UserPayments", x => x.Id);
+                    table.PrimaryKey("PK_Products", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_UserPayments_Users_UserId",
-                        column: x => x.UserId,
-                        principalTable: "Users",
+                        name: "FK_Products_Categories_CategoryId",
+                        column: x => x.CategoryId,
+                        principalTable: "Categories",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Products_Discounts_DiscountId",
+                        column: x => x.DiscountId,
+                        principalTable: "Discounts",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.SetNull);
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_UserAddresses_UserId",
-                table: "UserAddresses",
-                column: "UserId");
+                name: "IX_Products_CategoryId",
+                table: "Products",
+                column: "CategoryId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_UserPayments_UserId",
-                table: "UserPayments",
-                column: "UserId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Users_Email",
-                table: "Users",
-                column: "Email",
-                unique: true);
+                name: "IX_Products_DiscountId",
+                table: "Products",
+                column: "DiscountId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "UserAddresses");
+                name: "Products");
 
             migrationBuilder.DropTable(
-                name: "UserPayments");
+                name: "Categories");
 
             migrationBuilder.DropTable(
-                name: "Users");
+                name: "Discounts");
         }
     }
 }

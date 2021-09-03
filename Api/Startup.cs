@@ -1,3 +1,4 @@
+using API.Core;
 using EfDataAccess;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -45,6 +46,8 @@ namespace API
             }
 
             app.UseRouting();
+
+            app.UseMiddleware<GlobalExceptionHandler>();
 
             app.UseAuthorization();
 
