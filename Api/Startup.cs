@@ -1,5 +1,7 @@
 using API.Core;
+using Application;
 using EfDataAccess;
+using Implementation.Logging;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
@@ -28,6 +30,7 @@ namespace API
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddTransient<EcomShopContext>();
+            services.AddTransient<IUseCaseLogger, ConsoleUseCaseLogger>();
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
