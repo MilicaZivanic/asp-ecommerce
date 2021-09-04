@@ -9,8 +9,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Commands\" />
-    <Folder Include="Data Transfer\" />
     <Folder Include="Queries\" />
   </ItemGroup>
 

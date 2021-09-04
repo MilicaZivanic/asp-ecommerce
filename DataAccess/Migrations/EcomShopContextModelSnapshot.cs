@@ -471,6 +471,41 @@ namespace EfDataAccess.Migrations
                     b.ToTable("UserPayments");
                 });
 
+            modelBuilder.Entity("Domain.UserUseCase", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("DeletedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime?>("ModifiedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("UserCaseId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("UserUseCases");
+                });
+
             modelBuilder.Entity("Domain.Cart", b =>
                 {
                     b.HasOne("Domain.User", "User")
@@ -569,6 +604,17 @@ namespace EfDataAccess.Migrations
                     b.Navigation("User");
                 });
 
+            modelBuilder.Entity("Domain.UserUseCase", b =>
+                {
+                    b.HasOne("Domain.User", "User")
+                        .WithMany("UserUseCases")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("User");
+                });
+
             modelBuilder.Entity("Domain.Cart", b =>
                 {
                     b.Navigation("CartItems");
@@ -605,6 +651,8 @@ namespace EfDataAccess.Migrations
                     b.Navigation("UserAddresses");
 
                     b.Navigation("UserPayments");
+
+                    b.Navigation("UserUseCases");
                 });
 #pragma warning restore 612, 618
         }

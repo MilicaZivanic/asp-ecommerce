@@ -1,6 +1,8 @@
 using API.Core;
 using Application;
+using Application.Commands;
 using EfDataAccess;
+using Implementation.Commands;
 using Implementation.Logging;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -30,7 +32,10 @@ namespace API
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddTransient<EcomShopContext>();
+            services.AddTransient<UseCaseExecutor>();
+            services.AddTransient<IApplicationActor, FakeApiActor>();
             services.AddTransient<IUseCaseLogger, ConsoleUseCaseLogger>();
+            services.AddTransient<ISetUserUseCase, EfSetUserUseCases>();
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
@@ -52,6 +57,7 @@ namespace API
 
             app.UseMiddleware<GlobalExceptionHandler>();
 
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>

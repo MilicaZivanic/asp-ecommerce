@@ -28,6 +28,7 @@ namespace EfDataAccess
             modelBuilder.Entity<Product>().HasQueryFilter(p => !p.IsDeleted);
             modelBuilder.Entity<Order>().HasQueryFilter(p => !p.IsDeleted);
             modelBuilder.Entity<OrderItem>().HasQueryFilter(p => !p.IsDeleted);
+            modelBuilder.Entity<UserUseCase>().HasQueryFilter(p => !p.IsDeleted);
         }
         public override int SaveChanges()
         {
@@ -61,6 +62,7 @@ namespace EfDataAccess
         public DbSet<User> Users { get; set; }
         public DbSet<UserAddress> UserAddresses { get; set; }
         public DbSet<UserPayment> UserPayments { get; set; }
+        public DbSet<UserUseCase> UserUseCases { get; set; }
         public DbSet<Category> Categories { get; set; }
         public DbSet<Discount> Discounts { get; set; }
         public DbSet<Product> Products { get; set; }

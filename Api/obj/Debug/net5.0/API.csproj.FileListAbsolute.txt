@@ -67,3 +67,6 @@ C:\Users\Milica\Desktop\asp-project\API\obj\Debug\net5.0\API.pdb
 C:\Users\Milica\Desktop\asp-project\API\obj\Debug\net5.0\API.genruntimeconfig.cache
 C:\Users\Milica\Desktop\asp-project\API\bin\Debug\net5.0\Bogus.dll
 C:\Users\Milica\Desktop\asp-project\API\bin\Debug\net5.0\FluentValidation.dll
+C:\Users\Milica\Desktop\asp-project\API\bin\Debug\net5.0\AutoMapper.dll
+C:\Users\Milica\Desktop\asp-project\API\bin\Debug\net5.0\AutoMapper.Extensions.Microsoft.DependencyInjection.dll
+C:\Users\Milica\Desktop\asp-project\API\bin\Debug\net5.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
