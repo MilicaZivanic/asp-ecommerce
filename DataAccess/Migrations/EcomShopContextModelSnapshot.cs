@@ -493,7 +493,7 @@ namespace EfDataAccess.Migrations
                     b.Property<DateTime?>("ModifiedAt")
                         .HasColumnType("datetime2");
 
-                    b.Property<int>("UserCaseId")
+                    b.Property<int>("UseCaseId")
                         .HasColumnType("int");
 
                     b.Property<int>("UserId")
@@ -606,13 +606,11 @@ namespace EfDataAccess.Migrations
 
             modelBuilder.Entity("Domain.UserUseCase", b =>
                 {
-                    b.HasOne("Domain.User", "User")
+                    b.HasOne("Domain.User", null)
                         .WithMany("UserUseCases")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("Domain.Cart", b =>

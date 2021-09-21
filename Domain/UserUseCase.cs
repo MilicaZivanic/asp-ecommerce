@@ -9,8 +9,7 @@ namespace Domain
     public class UserUseCase : Entity
     {
         public int UserId { get; set; }
-        public int UserCaseId { get; set; }
-        public virtual User User { get; set; }
+        public int UseCaseId { get; set; }
 
     }
 }

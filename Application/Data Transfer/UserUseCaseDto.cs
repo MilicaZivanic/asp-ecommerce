@@ -9,6 +9,7 @@ namespace Application.Data_Transfer
     public class UserUseCaseDto
     {
         public int UserId { get; set; }
+        public string Identity { get; set; }
         public IEnumerable<int> AllowedUseCases { get; set; } = new List<int>();
     }
 }

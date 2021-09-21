@@ -12,6 +12,6 @@ namespace API.Core
 
         public string Identity => "Test Api User";
 
-        public IEnumerable<int> AllowedUseCases => new List<int> { 1 };
+        public IEnumerable<int> AllowedUseCases => new List<int> { 1,2, 3 };
     }
 }

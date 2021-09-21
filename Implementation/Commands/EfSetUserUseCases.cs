@@ -37,7 +37,7 @@ namespace Implementation.Commands
             _context.UserUseCases.AddRange(request.AllowedUseCases.Select(x => new UserUseCase
             {
                 UserId = request.UserId,
-                UserCaseId = x
+                UseCaseId = x
             }));
 
             _context.SaveChanges();

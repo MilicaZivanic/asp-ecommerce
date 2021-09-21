@@ -1368,6 +1368,8 @@
       "Implementation/1.0.0": {
         "dependencies": {
           "Application": "1.0.0",
+          "AutoMapper": "10.1.1",
+          "AutoMapper.Extensions.Microsoft.DependencyInjection": "8.1.1",
           "EfDataAccess": "1.0.0",
           "FluentValidation": "10.3.3"
         },

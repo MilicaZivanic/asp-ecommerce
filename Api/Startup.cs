@@ -1,9 +1,14 @@
 using API.Core;
 using Application;
 using Application.Commands;
+using Application.Email;
+using Application.Queries;
 using EfDataAccess;
 using Implementation.Commands;
+using Implementation.Email;
 using Implementation.Logging;
+using Implementation.Queries;
+using Implementation.Validators;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
@@ -12,6 +17,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
+using Nedelja7.Api.Core;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -31,11 +37,22 @@ namespace API
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            var appSettings = new AppSettings();
+            Configuration.Bind(appSettings);
+
             services.AddTransient<EcomShopContext>();
-            services.AddTransient<UseCaseExecutor>();
-            services.AddTransient<IApplicationActor, FakeApiActor>();
-            services.AddTransient<IUseCaseLogger, ConsoleUseCaseLogger>();
+
             services.AddTransient<ISetUserUseCase, EfSetUserUseCases>();
+            services.AddTransient<IGetUserUseCases, EfGetUserUseCases>();
+
+            services.AddHttpContextAccessor();
+            services.AddApplicationActor();
+            services.AddJwt(appSettings);
+            services.AddUsesCases();
+
+            services.AddTransient<IUseCaseLogger, ConsoleUseCaseLogger>();
+            services.AddTransient<IEmailSender, SmtpEmailSender>(x => new SmtpEmailSender(appSettings.EmailFrom, appSettings.EmailPassword));
+            services.AddAutoMapper(this.GetType().Assembly);
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {

@@ -1,6 +1,8 @@
 ﻿using Application;
 using Application.Commands;
 using Application.Data_Transfer;
+using Application.Queries;
+using Application.Searches;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -24,22 +26,9 @@ namespace API.Controllers
 
         // GET: api/<UserUseCasesController>
         [HttpGet]
-        public IEnumerable<string> Get()
+        public IActionResult Get([FromQuery] UserUseCaseSearch search, [FromServices] IGetUserUseCases query)
         {
-            return new string[] { "value1", "value2" };
-        }
-
-        // GET api/<UserUseCasesController>/5
-        [HttpGet("{id}")]
-        public string Get(int id)
-        {
-            return "value";
-        }
-
-        // POST api/<UserUseCasesController>
-        [HttpPost]
-        public void Post([FromBody] string value)
-        {
+            return Ok(_executor.ExecuteQuery(query, search));
         }
 
         // PUT api/<UserUseCasesController>/5
@@ -50,10 +39,5 @@ namespace API.Controllers
             return NoContent();
         }
 
-        // DELETE api/<UserUseCasesController>/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
-        {
-        }
     }
 }
