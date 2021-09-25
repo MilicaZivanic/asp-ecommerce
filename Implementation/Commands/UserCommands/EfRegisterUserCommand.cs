@@ -1,4 +1,5 @@
 ﻿using Application.Commands;
+using Application.Commands.UserCommands;
 using Application.Data_Transfer;
 using Application.Email;
 using AutoMapper;
@@ -12,20 +13,18 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Implementation.Commands
+namespace Implementation.Commands.UserCommands
 {
-    public class EfRegisterUserCommand : IRegisterUserCommand
+    public class EfRegisterUserCommand : EfCommand,IRegisterUserCommand
     {
-        private readonly EcomShopContext _context;
         private readonly RegisterUserValidator _validator;
         private readonly IEmailSender _sender;
         private readonly IMapper _mapper;
 
-        public EfRegisterUserCommand(EcomShopContext context, RegisterUserValidator validator, IEmailSender sender, IMapper mapper)
+        public EfRegisterUserCommand(EcomShopContext context, IEmailSender sender, RegisterUserValidator validator, IMapper mapper) : base(context)
         {
-            _context = context;
-            _validator = validator;
             _sender = sender;
+            _validator = validator;
             _mapper = mapper;
         }
 
@@ -33,11 +32,12 @@ namespace Implementation.Commands
 
         public string Name => "Ef Register User";
 
-        public void Execute(RegisterUserDto request)
+        public void Execute(UserDto request)
         {
             _validator.ValidateAndThrow(request);
-            _mapper.Map<User>(request);
-            _context.SaveChanges();
+            var user = _mapper.Map<User>(request);
+            Context.Add(user);
+            Context.SaveChanges();
 
             _sender.Send(new SendEmailDto
             {

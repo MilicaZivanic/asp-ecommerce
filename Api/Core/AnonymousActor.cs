@@ -8,10 +8,10 @@ namespace API.Core
 {
     public class AnonymousActor : IApplicationActor
     {
-        public int Id => 0;
+        public int Id => 2;
 
         public string Identity => "Anonymus";
 
-        public IEnumerable<int> AllowedUseCases => new List<int> { 4, 1, 5, 6, 7, 8 };
+        public IEnumerable<int> AllowedUseCases => new List<int> { 4, 8, 2, 9, 12, 13, 14, 16, 17, 18 };
     }
 }

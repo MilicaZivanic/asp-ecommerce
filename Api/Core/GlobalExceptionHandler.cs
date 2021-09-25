@@ -46,6 +46,13 @@ namespace API.Core
                             message = "Resource not found."
                         };
                         break;
+                    case ConflictException _:
+                        statusCode = StatusCodes.Status409Conflict;
+                        response = new
+                        {
+                            message = "You can't perform this operation."
+                        };
+                        break;
                     case ValidationException validationException:
                         statusCode = StatusCodes.Status422UnprocessableEntity;
 

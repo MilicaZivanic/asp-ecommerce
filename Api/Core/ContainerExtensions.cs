@@ -1,8 +1,9 @@
 ﻿using API.Core;
 using Application;
-using Application.Commands;
+using Application.Commands.UserCommands;
 using EfDataAccess;
 using Implementation.Commands;
+using Implementation.Commands.UserCommands;
 using Implementation.Validators;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Http;

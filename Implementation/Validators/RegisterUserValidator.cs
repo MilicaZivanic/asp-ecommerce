@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Implementation.Validators
 {
-    public class RegisterUserValidator : AbstractValidator<RegisterUserDto>
+    public class RegisterUserValidator : AbstractValidator<UserDto>
     {
         public RegisterUserValidator(EcomShopContext context)
         {
@@ -22,7 +22,7 @@ namespace Implementation.Validators
 
             RuleFor(x => x.Email).EmailAddress().WithMessage("Email needs to be in form of an email(example@mail.com)").DependentRules(() =>
             {
-                RuleFor(x => x.Email).Must(x => !context.Users.Any(user => user.Email == x)).WithMessage("Username is already taken.");
+                RuleFor(x => x.Email).Must(x => !context.Users.Any(user => user.Email == x)).WithMessage("Email is already taken.");
             });
 
         }

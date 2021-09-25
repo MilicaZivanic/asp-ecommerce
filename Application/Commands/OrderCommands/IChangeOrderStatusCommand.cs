@@ -5,9 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Application.Commands
+namespace Application.Commands.OrderCommands
 {
-    public interface IRegisterUserCommand : ICommand<RegisterUserDto>
+    public interface IChangeOrderStatusCommand : ICommand<ChangeOrderStatusDto>
     {
     }
 }

@@ -1,6 +1,9 @@
 ﻿using Application;
-using Application.Commands;
+using Application.Commands.UserCommands;
 using Application.Data_Transfer;
+using Application.Queries;
+using Application.Searches;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -24,35 +27,40 @@ namespace API.Controllers
 
         // GET: api/<UsersController>
         [HttpGet]
-        public IEnumerable<string> Get()
+        public IActionResult Get([FromQuery] UsersSearch search, [FromServices] IGetUsersQuery query)
         {
-            return new string[] { "value1", "value2" };
+            return Ok(_executor.ExecuteQuery(query, search));
         }
 
         // GET api/<UsersController>/5
         [HttpGet("{id}")]
-        public string Get(int id)
+        public IActionResult Get(int id, [FromServices] IGetUserQuery query)
         {
-            return "value";
+            return Ok(_executor.ExecuteQuery(query, id));
         }
 
         // POST api/<UsersController>
         [HttpPost]
-        public void Post([FromBody] RegisterUserDto dto, [FromServices] IRegisterUserCommand command)
+        public IActionResult Post([FromBody] UserDto dto, [FromServices] IRegisterUserCommand command)
         {
             _executor.ExecuteCommand(command, dto);
+            return StatusCode(StatusCodes.Status201Created);
         }
 
         // PUT api/<UsersController>/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        [HttpPut]
+        public IActionResult Put([FromBody] UserDto dto, [FromServices] IUpdateUserCommand command)
         {
+            _executor.ExecuteCommand(command, dto);
+            return NoContent();
         }
 
         // DELETE api/<UsersController>/5
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public IActionResult Delete(int id, [FromServices] IDeleteUserCommand command)
         {
+            _executor.ExecuteCommand(command, id);
+            return NoContent();
         }
     }
 }

@@ -1,10 +1,19 @@
 using API.Core;
 using Application;
 using Application.Commands;
+using Application.Commands.CategoryCommands;
+using Application.Commands.OrderCommands;
+using Application.Commands.ProductCommands;
+using Application.Commands.UserCommands;
 using Application.Email;
 using Application.Queries;
+using AutoMapper;
 using EfDataAccess;
 using Implementation.Commands;
+using Implementation.Commands.CategoryCommands;
+using Implementation.Commands.OrderCommands;
+using Implementation.Commands.ProductCommands;
+using Implementation.Commands.UserCommands;
 using Implementation.Email;
 using Implementation.Logging;
 using Implementation.Queries;
@@ -42,6 +51,33 @@ namespace API
 
             services.AddTransient<EcomShopContext>();
 
+            services.AddTransient<CreateOrderValidator>();
+            services.AddTransient<IGetOrdersQuery, EfGetOrdersQuery>();
+            services.AddTransient<IGetOrderQuery, EfGetOrderQuery>();
+            services.AddTransient<ICreateOrderCommand, EfCreateOrderCommand>();
+            services.AddTransient<IChangeOrderStatusCommand, EfChangeOrderStatusCommand>();
+
+            services.AddTransient<UpdateUserValidator>();
+            services.AddTransient<IGetUsersQuery, EfGetUsersQuery>();
+            services.AddTransient<IGetUserQuery, EfGetUserQuery>();
+            services.AddTransient<IDeleteUserCommand, EfDeleteUserCommand>();
+            services.AddTransient<IUpdateUserCommand, EfUpdateUserCommand>();
+
+            services.AddTransient<CreateProductValidator>();
+            services.AddTransient<UpdateProductValidator>();
+            services.AddTransient<IGetProductsQuery, EfGetProductsQuery>();
+            services.AddTransient<IGetProductQuery, EfGetProductQuery>();
+            services.AddTransient<ICreateProductCommand, EfCreateProductCommand>();
+            services.AddTransient<IUpdateProductCommand, EfUpdateProductCommand>();
+            services.AddTransient<IDeleteProductCommand, EfDeleteProductCommand>();
+
+            services.AddTransient<CreateCategoryValidator>();
+            services.AddTransient<UpdateCategoryValidator>();
+            services.AddTransient<IGetCategoriesQuery, EfGetCategoriesQuery>();
+            services.AddTransient<ICreateCategoryCommand, EfCreateCategoryCommand>();
+            services.AddTransient<IDeleteCategoryCommand, EfDeleteCategoryCommand>();
+            services.AddTransient<IUpdateCategoryCommand, EfUpdateCategoryCommand>();
+
             services.AddTransient<ISetUserUseCase, EfSetUserUseCases>();
             services.AddTransient<IGetUserUseCases, EfGetUserUseCases>();
 
@@ -50,9 +86,9 @@ namespace API
             services.AddJwt(appSettings);
             services.AddUsesCases();
 
-            services.AddTransient<IUseCaseLogger, ConsoleUseCaseLogger>();
+            services.AddTransient<IUseCaseLogger, DatabaseUseCaseLogger>();
             services.AddTransient<IEmailSender, SmtpEmailSender>(x => new SmtpEmailSender(appSettings.EmailFrom, appSettings.EmailPassword));
-            services.AddAutoMapper(this.GetType().Assembly);
+            services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {

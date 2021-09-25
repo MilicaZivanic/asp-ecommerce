@@ -323,6 +323,30 @@ namespace EfDataAccess.Migrations
                     b.ToTable("Products");
                 });
 
+            modelBuilder.Entity("Domain.UseCaseLog", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Actor")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Data")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("Date")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("UseCaseName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("UseCaseLogs");
+                });
+
             modelBuilder.Entity("Domain.User", b =>
                 {
                     b.Property<int>("Id")

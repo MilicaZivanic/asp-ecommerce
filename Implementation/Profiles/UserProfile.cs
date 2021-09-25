@@ -13,8 +13,9 @@ namespace Implementation.Profiles
     {
         public UserProfile()
         {
-            CreateMap<User, RegisterUserDto>();
-            CreateMap<RegisterUserDto, User>();
+            CreateMap<User, UserDto>().ForMember(dest => dest.Payments, o => o.MapFrom(src => src.UserPayments))
+                                      .ForMember(dest => dest.Addresses, o => o.MapFrom(src => src.UserAddresses));
+            CreateMap<UserDto, User>().ForSourceMember(x => x.Id, o => o.DoNotValidate());
         }
     }
 }

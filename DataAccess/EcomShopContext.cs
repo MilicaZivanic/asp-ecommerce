@@ -63,6 +63,7 @@ namespace EfDataAccess
         public DbSet<UserAddress> UserAddresses { get; set; }
         public DbSet<UserPayment> UserPayments { get; set; }
         public DbSet<UserUseCase> UserUseCases { get; set; }
+        public DbSet<UseCaseLog> UseCaseLogs { get; set; }
         public DbSet<Category> Categories { get; set; }
         public DbSet<Discount> Discounts { get; set; }
         public DbSet<Product> Products { get; set; }
