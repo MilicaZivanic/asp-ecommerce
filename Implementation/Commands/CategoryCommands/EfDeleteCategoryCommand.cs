@@ -33,7 +33,7 @@ namespace Implementation.Commands.CategoryCommands
             }
             if (category.Products.Any())
             {
-                throw new ConflictException();
+                throw new ConflictException("Some of the products belong to this category, there for you are not allowed to delete it.");
             }
 
             category.IsDeleted = true;

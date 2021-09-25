@@ -2,18 +2,24 @@ using API.Core;
 using Application;
 using Application.Commands;
 using Application.Commands.CategoryCommands;
+using Application.Commands.DiscountCommands;
 using Application.Commands.OrderCommands;
 using Application.Commands.ProductCommands;
+using Application.Commands.UserAddressCommands;
 using Application.Commands.UserCommands;
+using Application.Commands.UserPaymentCommands;
 using Application.Email;
 using Application.Queries;
 using AutoMapper;
 using EfDataAccess;
 using Implementation.Commands;
 using Implementation.Commands.CategoryCommands;
+using Implementation.Commands.DiscountCommands;
 using Implementation.Commands.OrderCommands;
 using Implementation.Commands.ProductCommands;
+using Implementation.Commands.UserAddressCommands;
 using Implementation.Commands.UserCommands;
+using Implementation.Commands.UserPaymentCommands;
 using Implementation.Email;
 using Implementation.Logging;
 using Implementation.Queries;
@@ -62,6 +68,23 @@ namespace API
             services.AddTransient<IGetUserQuery, EfGetUserQuery>();
             services.AddTransient<IDeleteUserCommand, EfDeleteUserCommand>();
             services.AddTransient<IUpdateUserCommand, EfUpdateUserCommand>();
+
+            services.AddTransient<UserAddressValidator>();
+            services.AddTransient<ICreateUserAddressCommand, EfCreateUserAddressCommand>();
+            services.AddTransient<IUpdateUserAddressCommand, EfUpdateUserAddressCommand>();
+            services.AddTransient<IDeleteUserAddressCommand, EfDeleteUserAddressCommand>();
+
+            services.AddTransient<UserPaymentValidator>();
+            services.AddTransient<ICreateUserPaymentCommand, EfCreateUserPaymentCommand>();
+            services.AddTransient<IUpdateUserPaymentCommand, EfUpdateUserPaymentCommand>();
+            services.AddTransient<IDeleteUserPaymentCommand, EfDeleteUserPaymentCommand>();
+
+            services.AddTransient<DiscountValidator>();
+            services.AddTransient<IGetDiscountQuery, EfGetDiscountQuery>();
+            services.AddTransient<IGetDiscountsQuery, EfGetDiscountsQuery>();
+            services.AddTransient<ICreateDiscountCommand, EfCreateDiscountCommand>();
+            services.AddTransient<IUpdateDiscountCommand, EfUpdateDiscountCommand>();
+            services.AddTransient<IDeleteDiscountCommand, EfDeleteDiscountCommand>();
 
             services.AddTransient<CreateProductValidator>();
             services.AddTransient<UpdateProductValidator>();

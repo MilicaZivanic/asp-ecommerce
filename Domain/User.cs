@@ -14,10 +14,10 @@ namespace Domain
         public string Password { get; set; }
         public string Phone { get; set; }
 
+        public virtual Cart Cart { get; set; }
         public virtual ICollection<UserAddress> UserAddresses { get; set; } = new HashSet<UserAddress>();
         public virtual ICollection<UserPayment> UserPayments { get; set; } = new HashSet<UserPayment>();
         public virtual ICollection<Order> Orders { get; set; } = new HashSet<Order>();
-        public virtual ICollection<Cart> Carts { get; set; } = new HashSet<Cart>();
         public virtual ICollection<UserUseCase> UserUseCases { get; set; } = new HashSet<UserUseCase>();
 
 

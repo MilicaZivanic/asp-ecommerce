@@ -49,7 +49,9 @@ namespace EfDataAccess.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("UserId");
+                    b.HasIndex("UserId")
+                        .IsUnique()
+                        .HasFilter("[UserId] IS NOT NULL");
 
                     b.ToTable("Cart");
                 });
@@ -533,9 +535,8 @@ namespace EfDataAccess.Migrations
             modelBuilder.Entity("Domain.Cart", b =>
                 {
                     b.HasOne("Domain.User", "User")
-                        .WithMany("Carts")
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Restrict);
+                        .WithOne("Cart")
+                        .HasForeignKey("Domain.Cart", "UserId");
 
                     b.Navigation("User");
                 });
@@ -666,7 +667,7 @@ namespace EfDataAccess.Migrations
 
             modelBuilder.Entity("Domain.User", b =>
                 {
-                    b.Navigation("Carts");
+                    b.Navigation("Cart");
 
                     b.Navigation("Orders");
 

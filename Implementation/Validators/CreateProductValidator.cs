@@ -23,6 +23,10 @@ namespace Implementation.Validators
 
             RuleFor(x => x.Price).Must(x => x >= 0.1m).WithMessage("Min value for price is $0.1.");
             RuleFor(x => x.Description).NotEmpty().WithMessage("Description is required.");
+            RuleFor(x => x.DiscountId).Must(x =>
+            {
+                return context.Discounts.Any(y => y.Id == x);
+            }).WithMessage("Provided discount doesn't exist.");
 
             RuleFor(x => x.Name).NotEmpty().WithMessage("Name is required.").DependentRules(() =>
             {
