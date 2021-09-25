@@ -1,6 +1,7 @@
 ﻿using Application;
 using Application.Commands.UserAddressCommands;
 using Application.Data_Transfer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -22,6 +23,7 @@ namespace API.Controllers
             _executor = executor;
         }
 
+        [Authorize]
         // POST api/<UserAddressController>
         [HttpPost]
         public IActionResult Post([FromBody] UserAddressDto dto, [FromServices] ICreateUserAddressCommand command )
@@ -30,6 +32,7 @@ namespace API.Controllers
             return StatusCode(StatusCodes.Status201Created);
         }
 
+        [Authorize]
         // PUT api/<UserAddressController>/5
         [HttpPut]
         public IActionResult Put([FromBody] UserAddressDto dto, [FromServices] IUpdateUserAddressCommand command)
@@ -38,6 +41,7 @@ namespace API.Controllers
             return NoContent();
         }
 
+        [Authorize]
         // DELETE api/<UserAddressController>/5
         [HttpDelete("{id}")]
         public IActionResult Delete(int id, [FromServices] IDeleteUserAddressCommand command)

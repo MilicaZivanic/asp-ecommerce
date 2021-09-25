@@ -3,6 +3,7 @@ using Application.Commands.OrderCommands;
 using Application.Data_Transfer;
 using Application.Queries;
 using Application.Searches;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -25,6 +26,7 @@ namespace API.Controllers
             _executor = executor;
         }
 
+        [Authorize]
         // GET: api/<OrdersController>
         [HttpGet]
         public IActionResult Get([FromQuery] OrderSearch search, [FromServices] IGetOrdersQuery query)
@@ -32,6 +34,7 @@ namespace API.Controllers
             return Ok(_executor.ExecuteQuery(query, search));
         }
 
+        [Authorize]
         // GET api/<OrdersController>/5
         [HttpGet("{id}")]
         public IActionResult Get(int id, [FromServices] IGetOrderQuery query)
@@ -39,6 +42,7 @@ namespace API.Controllers
             return Ok(_executor.ExecuteQuery(query, id));
         }
 
+        [Authorize]
         // POST api/<OrdersController>
         [HttpPost]
         public IActionResult Post([FromBody] OrderDto dto, [FromServices] ICreateOrderCommand command)
@@ -46,6 +50,7 @@ namespace API.Controllers
             _executor.ExecuteCommand(command, dto);
             return StatusCode(StatusCodes.Status201Created);
         }
+        [Authorize]
         [HttpPatch("changestatus")]
         public IActionResult ChangeStatus([FromBody] ChangeOrderStatusDto dto, [FromServices] IChangeOrderStatusCommand command)
         {

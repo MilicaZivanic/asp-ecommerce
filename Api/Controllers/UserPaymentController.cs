@@ -1,6 +1,7 @@
 ﻿using Application;
 using Application.Commands.UserPaymentCommands;
 using Application.Data_Transfer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -23,6 +24,7 @@ namespace API.Controllers
             _executor = executor;
         }
 
+        [Authorize]
         // POST api/<UserPaymentController>
         [HttpPost]
         public IActionResult Post([FromBody] UserPaymentDto dto, [FromServices] ICreateUserPaymentCommand command)
@@ -31,6 +33,7 @@ namespace API.Controllers
             return StatusCode(StatusCodes.Status201Created);
         }
 
+        [Authorize]
         // PUT api/<UserPaymentController>/5
         [HttpPut]
         public IActionResult Put([FromBody] UserPaymentDto dto, [FromServices] IUpdateUserPaymentCommand command)
@@ -39,6 +42,7 @@ namespace API.Controllers
             return NoContent();
         }
 
+        [Authorize]
         // DELETE api/<UserPaymentController>/5
         [HttpDelete("{id}")]
         public IActionResult Delete(int id, [FromServices] IDeleteUserPaymentCommand command)

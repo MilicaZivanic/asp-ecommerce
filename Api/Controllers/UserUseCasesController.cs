@@ -3,6 +3,7 @@ using Application.Commands;
 using Application.Data_Transfer;
 using Application.Queries;
 using Application.Searches;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -24,6 +25,7 @@ namespace API.Controllers
             _executor = executor;
         }
 
+        [Authorize]
         // GET: api/<UserUseCasesController>
         [HttpGet]
         public IActionResult Get([FromQuery] UserUseCaseSearch search, [FromServices] IGetUserUseCases query)
@@ -31,6 +33,7 @@ namespace API.Controllers
             return Ok(_executor.ExecuteQuery(query, search));
         }
 
+        [Authorize]
         // PUT api/<UserUseCasesController>/5
         [HttpPut]
         public IActionResult Put([FromBody] UserUseCaseDto dto, [FromServices] ISetUserUseCase command)

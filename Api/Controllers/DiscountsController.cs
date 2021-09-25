@@ -3,6 +3,7 @@ using Application.Commands.DiscountCommands;
 using Application.Data_Transfer;
 using Application.Queries;
 using Application.Searches;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -25,6 +26,7 @@ namespace API.Controllers
             _executor = executor;
         }
 
+        [Authorize]
         // GET api/<DiscountsController>
         [HttpGet]
         public IActionResult Get([FromBody] DiscountSearch search, [FromServices] IGetDiscountsQuery query)
@@ -39,6 +41,7 @@ namespace API.Controllers
             return Ok(_executor.ExecuteQuery(query, id));
         }
 
+        [Authorize]
         // POST api/<DiscountsController>
         [HttpPost]
         public IActionResult Post([FromBody] DiscountDto dto, [FromServices] ICreateDiscountCommand command)
@@ -47,6 +50,7 @@ namespace API.Controllers
             return StatusCode(StatusCodes.Status201Created);
         }
 
+        [Authorize]
         // PUT api/<DiscountsController>/5
         [HttpPut]
         public IActionResult Put([FromBody] DiscountDto dto, [FromServices] IUpdateDiscountCommand command)
@@ -55,6 +59,7 @@ namespace API.Controllers
             return NoContent();
         }
 
+        [Authorize]
         // DELETE api/<DiscountsController>/5
         [HttpDelete("{id}")]
         public IActionResult Delete(int id, [FromServices] IDeleteDiscountCommand command)

@@ -49,6 +49,7 @@ namespace API.Controllers
             return StatusCode(StatusCodes.Status201Created);
         }
 
+        [Authorize]
         // PUT api/<ProductsController>/5
         [HttpPut]
         public IActionResult Put([FromBody] ProductDto dto, [FromServices] IUpdateProductCommand command)
@@ -57,6 +58,7 @@ namespace API.Controllers
             return NoContent();
         }
 
+        [Authorize]
         // DELETE api/<ProductsController>/5
         [HttpDelete("{id}")]
         public IActionResult Delete(int id, [FromServices] IDeleteProductCommand command)
